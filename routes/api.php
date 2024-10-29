@@ -4,10 +4,12 @@ use App\Enums\VersionEnum;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AcceptJsonMiddleware;
 
 Route::prefix('deliveries')
     ->group(function () {
-        Route::post('{delivery}/status-change', [\App\Http\Controllers\DeliveryController::class, 'statusChange']);
+        Route::post('{delivery}/status-change', [\App\Http\Controllers\DeliveryController::class, 'statusChange'])
+            ->middleware(AcceptJsonMiddleware::class);
     });
 
 // Это не нужно
