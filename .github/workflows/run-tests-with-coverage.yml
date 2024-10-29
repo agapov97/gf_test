@@ -2,9 +2,9 @@ name: Run tests with coverage
 
 on:
   push:
-    branches: ["development"]
+    branches: ["master"]
   pull_request:
-    branches: ["development"]
+    branches: ["master"]
 
 jobs:
   test-with-coverage:
@@ -58,9 +58,9 @@ jobs:
         run: vendor/bin/phpunit tests/DeliveryTest.php --coverage-clover build/logs/clover.xml
         env:
           DB_PORT: ${{ job.services.postgres.ports[5432] }}
-      - name: Upload coverage results to Coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          composer global require php-coveralls/php-coveralls
-          php-coveralls --coverage_clover=build/logs/clover.xml -v
+#      - name: Upload coverage results to Coveralls
+#        env:
+#          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          composer global require php-coveralls/php-coveralls
+#          php-coveralls --coverage_clover=build/logs/clover.xml -v
